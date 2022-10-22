@@ -1,6 +1,11 @@
 # 编译的目标平台
 [build]
-target = "riscv64imac-unknown-none-elf"
+# target = "riscv32imac-unknown-none-elf"
+target = "x86_64-unknown-linux-gnu"
+
+# 测试使用的 target "x86_64-unknown-linux-gnu"
+# 测试 command: cargo run --target "x86_64-unknown-linux-gnu"
+# 已经将指令封装进 Makefile，只需要执行 make run 即可。
 
 # 使用我们的 linker script 来进行链接
 [target.riscv64imac-unknown-none-elf]
