@@ -3,51 +3,6 @@
 version = 3
 
 [[package]]
-name = "ctor"
-version = "0.1.26"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6d2301688392eb071b0bf1a37be05c469d3cc4dbbd95df672fe28ab021e6a096"
-dependencies = [
- "quote",
- "syn",
-]
-
-[[package]]
-name = "fatfs"
-version = "0.1.0"
-dependencies = [
- "inventory",
- "vfscore",
-]
-
-[[package]]
-name = "ghost"
-version = "0.1.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "eb19fe8de3ea0920d282f7b77dd4227aea6b8b999b42cdf0ca41b2472b14443a"
-dependencies = [
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "inventory"
-version = "0.3.2"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e21e0a36a4dc4b469422ee17f715e8313f4a637675656d6a13637954278c6f55"
-dependencies = [
- "ctor",
- "ghost",
-]
-
-[[package]]
-name = "lazy_static"
-version = "1.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
-
-[[package]]
 name = "linkme"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -62,16 +17,6 @@ version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8ea60989e1675e85b206a8e44835d06727f5794e095a7229c81f70078c63fea9"
 dependencies = [
- "proc-macro2",
- "quote",
- "syn",
-]
-
-[[package]]
-name = "macros"
-version = "0.1.0"
-dependencies = [
- "lazy_static",
  "proc-macro2",
  "quote",
  "syn",
@@ -96,14 +41,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "ramfs"
-version = "0.1.0"
-dependencies = [
- "inventory",
- "vfscore",
-]
-
-[[package]]
 name = "syn"
 version = "1.0.103"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -122,19 +59,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "test_entry"
-version = "0.1.0"
-dependencies = [
- "fatfs",
- "linkme",
- "macros",
- "ramfs",
- "task",
- "test_tasks",
- "vfscore",
-]
-
-[[package]]
 name = "test_tasks"
 version = "0.1.0"
 dependencies = [
@@ -147,10 +71,3 @@ name = "unicode-ident"
 version = "1.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6ceab39d59e4c9499d4e5a8ee0e2735b891bb7308ac83dfb4e80cad195c9f6f3"
-
-[[package]]
-name = "vfscore"
-version = "0.1.0"
-dependencies = [
- "inventory",
-]
