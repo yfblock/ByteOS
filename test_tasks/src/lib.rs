@@ -1,6 +1,8 @@
-use linkme::distributed_slice;
+// use linkme::distributed_slice;
+use header::linkme as linkme;
 
-#[distributed_slice(task::TASKS)]
+#[header::linkme::distributed_slice(task::TASKS)]
+#[linkme(crate = linkme)]
 fn test_func() {
     println!("test in other crate");
 }

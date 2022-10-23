@@ -3,6 +3,13 @@
 version = 3
 
 [[package]]
+name = "header"
+version = "0.1.0"
+dependencies = [
+ "linkme",
+]
+
+[[package]]
 name = "linkme"
 version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -62,7 +69,7 @@ dependencies = [
 name = "test_tasks"
 version = "0.1.0"
 dependencies = [
- "linkme",
+ "header",
  "task",
 ]
 

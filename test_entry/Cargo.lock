@@ -32,6 +32,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "header"
+version = "0.1.0"
+dependencies = [
+ "linkme",
+]
+
+[[package]]
 name = "inventory"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -72,6 +79,7 @@ name = "macros"
 version = "0.1.0"
 dependencies = [
  "lazy_static",
+ "linkme",
  "proc-macro2",
  "quote",
  "syn",
@@ -138,7 +146,7 @@ dependencies = [
 name = "test_tasks"
 version = "0.1.0"
 dependencies = [
- "linkme",
+ "header",
  "task",
 ]
 

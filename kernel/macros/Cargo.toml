@@ -12,3 +12,5 @@ proc-macro2 = "1.0"
 lazy_static = "1.4.0"
 quote = "1.0"
 syn = { version = "*", features = ["full"]}
+
+linkme = "0.3"
