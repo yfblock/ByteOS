@@ -7,6 +7,6 @@ use macros::byteos_module_use;
 // Tasks
 byteos_module_use!(test_tasks);
 
-// filesystem
+// Filesystem
 byteos_module_use!(ramfs);
 byteos_module_use!(fatfs);
