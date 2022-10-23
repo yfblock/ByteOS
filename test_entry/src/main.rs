@@ -1,3 +1,5 @@
+mod tasks;
+
 fn main() {
     println!("Hello, world!");
     println!("------------- Test Start -------------");
@@ -11,5 +13,7 @@ fn main() {
                                 // TODO: 有没有一种其他的办法来做到这些？ 
     println!("------------- Test Fatfs -------------");
     fatfs::test();
+    println!("------------- Test Task --------------");
+    task::test();
     println!("------------- Test End ---------------");
 }
