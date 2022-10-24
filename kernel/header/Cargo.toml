@@ -7,3 +7,4 @@ edition = "2021"
 
 [dependencies]
 linkme = "0.3"
+macros = { path = "../macros" }

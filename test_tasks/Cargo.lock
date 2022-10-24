@@ -7,7 +7,14 @@ name = "header"
 version = "0.1.0"
 dependencies = [
  "linkme",
+ "macros",
 ]
+
+[[package]]
+name = "lazy_static"
+version = "1.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 
 [[package]]
 name = "linkme"
@@ -24,6 +31,17 @@ version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "8ea60989e1675e85b206a8e44835d06727f5794e095a7229c81f70078c63fea9"
 dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
+]
+
+[[package]]
+name = "macros"
+version = "0.1.0"
+dependencies = [
+ "lazy_static",
+ "linkme",
  "proc-macro2",
  "quote",
  "syn",

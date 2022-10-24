@@ -9,4 +9,4 @@ byteos_module_use!(test_tasks);
 
 // Filesystem
 byteos_module_use!(ramfs);
-byteos_module_use!(fatfs);
+// byteos_module_use!(fatfs);
