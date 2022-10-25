@@ -32,6 +32,14 @@ dependencies = [
 ]
 
 [[package]]
+name = "header"
+version = "0.1.0"
+dependencies = [
+ "linkme",
+ "macros",
+]
+
+[[package]]
 name = "inventory"
 version = "0.3.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -79,6 +87,7 @@ name = "os"
 version = "0.1.0"
 dependencies = [
  "fatfs",
+ "header",
  "linkme",
  "macros",
  "ramfs",

@@ -10,7 +10,7 @@ vfscore = { path = "../kernel/vfscore" }
 ramfs = { path = "../kernel/ramfs" }
 fatfs = { path = "../kernel/fatfs" }
 task = { path = "../kernel/task" }
-macros = { path = "../kernel/macros" }
+macros = { path = "../kernel/header/macros" }
 
 linkme = { path = "../dependency/linkme" }
 test_tasks = { path = "../test_tasks" }

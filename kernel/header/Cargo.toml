@@ -7,4 +7,4 @@ edition = "2021"
 
 [dependencies]
 linkme = { path = "../../dependency/linkme" }
-macros = { path = "../macros" }
+macros = { path = "macros" }

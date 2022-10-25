@@ -42,15 +42,6 @@ unsafe extern "C" fn _start() -> ! {
     )
 }
 
-// #[distributed_slice]
-// pub static SHENANIGANS: [usize] = [..];
-
-#[distributed_slice(SHENANIGANS)]
-static NN: usize = 99;
-
-#[distributed_slice(SHENANIGANS)]
-static NNN: usize = 999;
-
 /// rust 入口函数
 /// 
 /// 进行操作系统的初始化，
@@ -64,15 +55,6 @@ pub extern "C" fn rust_main(_hart_id: usize, _device_tree_addr: usize) -> ! {
     println!("[kernel] welcome to ByteOS");
 
     println!("len of the SHENANIGANS: {}", SHENANIGANS.len());
-
-    assert_eq!(SHENANIGANS.len(), 3);
-
-    let mut sum = 0;
-    for n in SHENANIGANS {
-        sum += n;
-    }
-
-    assert_eq!(sum, 9 + 99 + 999);
 
     println!("test func value: {}", test_tasks::test_func());
 
