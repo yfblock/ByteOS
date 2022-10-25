@@ -19,5 +19,5 @@ fatfs = { path = "../kernel/fatfs" }
 task = { path = "../kernel/task" }
 macros = { path = "../kernel/macros" }
 
-linkme = "0.3"
+linkme = { path = "../dependency/linkme" }
 test_tasks = { path = "../test_tasks" }

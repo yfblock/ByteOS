@@ -1,11 +1,11 @@
 #![no_std]
-// use linkme::distributed_slice;
-use header::linkme as linkme;
+#![feature(used_with_arg)]
+// use header::linkme as linkme;
+use linkme;
 
-#[header::linkme::distributed_slice(task::TASKS)]
-#[linkme(crate = linkme)]
-fn test_func() {
-    // println!("test in other crate");
+#[linkme::distributed_slice(task::TASKS)]
+pub fn test_func() -> usize {
+    123
 }
 
 pub fn test() {

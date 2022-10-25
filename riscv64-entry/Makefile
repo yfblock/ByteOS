@@ -4,9 +4,6 @@ TARGET      := riscv64imac-unknown-none-elf
 KERNEL_FILE := target/$(TARGET)/release/os
 DEBUG_FILE  ?= $(KERNEL_FILE)
 
-OBJDUMP     := rust-objdump --arch-name=riscv64
-OBJCOPY     := rust-objcopy --binary-architecture=riscv64
-
 all:
 	cargo build --release
 	cp $(KERNEL_FILE) kernel-qemu

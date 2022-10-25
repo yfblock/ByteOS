@@ -7,11 +7,16 @@
 #![feature(asm_const)]
 #![feature(asm_sym)]
 #![allow(unaligned_references)]
+#![feature(used_with_arg)]
+
+use linkme::distributed_slice;
+use task::SHENANIGANS;
 
 #[macro_use]
 mod console;
 mod panic;
 mod sbi;
+mod module;
 
 use core::arch::asm;
 
@@ -37,17 +42,43 @@ unsafe extern "C" fn _start() -> ! {
     )
 }
 
+// #[distributed_slice]
+// pub static SHENANIGANS: [usize] = [..];
+
+#[distributed_slice(SHENANIGANS)]
+static NN: usize = 99;
+
+#[distributed_slice(SHENANIGANS)]
+static NNN: usize = 999;
+
 /// rust 入口函数
 /// 
 /// 进行操作系统的初始化，
 #[no_mangle]
-pub extern "C" fn rust_main(hart_id: usize, _device_tree_addr: usize) -> ! {
+pub extern "C" fn rust_main(_hart_id: usize, _device_tree_addr: usize) -> ! {
     // 让其他核心进入等待 用在多核的情况 单核下无需使用。
     // if hart_id != 0 {
     //     support_hart_resume(hart_id, 0);
     // }
+
     println!("[kernel] welcome to ByteOS");
-    task::test();
+
+    println!("len of the SHENANIGANS: {}", SHENANIGANS.len());
+
+    assert_eq!(SHENANIGANS.len(), 3);
+
+    let mut sum = 0;
+    for n in SHENANIGANS {
+        sum += n;
+    }
+
+    assert_eq!(sum, 9 + 99 + 999);
+
+    println!("test func value: {}", test_tasks::test_func());
+
+    let sum = task::test();
+    println!("len of functions array: {}", task::TASKS.len());
+    println!("sum of linkme functions: {}", sum);
     
     // 调用rust api关机
     panic!("正常关机")

@@ -1,4 +1,3 @@
-mod tasks;
 mod module;
 
 fn main() {
@@ -16,6 +15,8 @@ fn main() {
     // println!("------------- Test Fatfs -------------");
     // fatfs::test();
     println!("------------- Test Task --------------");
-    task::test();
+    let sum = task::test();
+    println!("len of function array: {}", task::TASKS.len());
+    println!("sum of functions: {}", sum);
     println!("------------- Test End ---------------");
 }

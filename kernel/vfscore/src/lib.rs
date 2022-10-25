@@ -12,9 +12,9 @@ pub struct TestFlag {
 inventory::collect!(TestFlag);
 
 pub fn itor_trait() {
-    for flag in inventory::iter::<TestFlag> {
+    // for flag in inventory::iter::<TestFlag> {
         // println!("-{}, --{}", flag.short, flag.name);
-    }
+    // }
 }
 
 #[cfg(test)]
