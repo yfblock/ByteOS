@@ -1,3 +1,5 @@
+#![no_std]
+
 use linkme::distributed_slice;
 
 #[distributed_slice]

@@ -35,7 +35,7 @@ dependencies = [
 name = "header"
 version = "0.1.0"
 dependencies = [
- "linkme",
+ "linkme 0.3.3",
  "macros",
 ]
 
@@ -58,10 +58,26 @@ checksum = "e2abad23fbc42b3700f2f279844dc832adb2b2eb069b2df918f455c4e18cc646"
 [[package]]
 name = "linkme"
 version = "0.3.3"
+dependencies = [
+ "linkme-impl 0.3.3",
+]
+
+[[package]]
+name = "linkme"
+version = "0.3.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "f1fcc556441a74961e26e894f9837dc5d2eb6e8f6bc8ec3bbe7ac445ddcf732e"
 dependencies = [
- "linkme-impl",
+ "linkme-impl 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "linkme-impl"
+version = "0.3.3"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn",
 ]
 
 [[package]]
@@ -80,7 +96,7 @@ name = "macros"
 version = "0.1.0"
 dependencies = [
  "lazy_static",
- "linkme",
+ "linkme 0.3.3 (registry+https://github.com/rust-lang/crates.io-index)",
  "proc-macro2",
  "quote",
  "syn",
@@ -127,7 +143,7 @@ dependencies = [
 name = "task"
 version = "0.1.0"
 dependencies = [
- "linkme",
+ "linkme 0.3.3",
 ]
 
 [[package]]
@@ -135,7 +151,7 @@ name = "test_entry"
 version = "0.1.0"
 dependencies = [
  "fatfs",
- "linkme",
+ "linkme 0.3.3",
  "macros",
  "ramfs",
  "task",

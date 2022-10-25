@@ -15,3 +15,9 @@ panic = "abort"
 vfscore = { path = "../kernel/vfscore" }
 ramfs = { path = "../kernel/ramfs" }
 fatfs = { path = "../kernel/fatfs" }
+
+task = { path = "../kernel/task" }
+macros = { path = "../kernel/macros" }
+
+linkme = "0.3"
+test_tasks = { path = "../test_tasks" }

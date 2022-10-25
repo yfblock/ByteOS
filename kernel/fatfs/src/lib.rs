@@ -1,5 +1,6 @@
+#![no_std]
 use vfscore::TestFlag;
 
-inventory::submit! {
-    TestFlag { short: 'f', name: "fatfs"}
-}
+// inventory::submit! {
+//     TestFlag { short: 'f', name: "fatfs"}
+// }

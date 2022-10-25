@@ -42,10 +42,12 @@ unsafe extern "C" fn _start() -> ! {
 /// 进行操作系统的初始化，
 #[no_mangle]
 pub extern "C" fn rust_main(hart_id: usize, _device_tree_addr: usize) -> ! {
-    // 让其他核心进入等待
-    if hart_id != 0 {
-        support_hart_resume(hart_id, 0);
-    }
+    // 让其他核心进入等待 用在多核的情况 单核下无需使用。
+    // if hart_id != 0 {
+    //     support_hart_resume(hart_id, 0);
+    // }
+    println!("[kernel] welcome to ByteOS");
+    task::test();
     
     // 调用rust api关机
     panic!("正常关机")

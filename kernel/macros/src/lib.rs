@@ -1,3 +1,5 @@
+#![no_std]
+
 use syn::parse_macro_input;
 
 #[macro_use]
