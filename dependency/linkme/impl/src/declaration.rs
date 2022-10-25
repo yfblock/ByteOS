@@ -153,14 +153,14 @@ pub fn expand(input: TokenStream) -> TokenStream {
             #[link_section = #windows_dupcheck_stop]
             static DUPCHECK_STOP: () = ();
 
-            #[used]
+            #[used(linker)]
             #[cfg(any(target_os = "none", target_os = "linux", target_os = "illumos", target_os = "freebsd"))]
             #[cfg_attr(any(target_os = "none", target_os = "linux"), link_section = #linux_section)]
             #[cfg_attr(target_os = "illumos", link_section = #illumos_section)]
             #[cfg_attr(target_os = "freebsd", link_section = #freebsd_section)]
             static mut LINKME_PLEASE: [<#ty as #linkme_path::private::Slice>::Element; 0] = [];
 
-            #[used]
+            #[used(linker)]
             #[cfg_attr(any(target_os = "none", target_os = "linux"), link_section = #linux_dupcheck)]
             #[cfg_attr(any(target_os = "macos", target_os = "ios", target_os = "tvos"), link_section = #macho_dupcheck)]
             #[cfg_attr(target_os = "windows", link_section = #windows_dupcheck)]

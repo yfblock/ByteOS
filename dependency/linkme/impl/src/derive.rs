@@ -83,7 +83,7 @@ pub fn expand(input: Enum) -> TokenStream {
                 #![linkme_freebsd_section = $freebsd_section:expr]
                 $item:item
             ) => {
-                #[used]
+                #[used(linker)]
                 #[cfg_attr(any(target_os = "none", target_os = "linux"), link_section = $linux_section)]
                 #[cfg_attr(any(target_os = "macos", target_os = "ios", target_os = "tvos"), link_section = $macho_section)]
                 #[cfg_attr(target_os = "windows", link_section = $windows_section)]
@@ -92,7 +92,7 @@ pub fn expand(input: Enum) -> TokenStream {
                 $item
             };
             ($item:item) => {
-                #[used]
+                #[used(linker)]
                 #[cfg_attr(any(target_os = "none", target_os = "linux"), link_section = #linux_section)]
                 #[cfg_attr(any(target_os = "macos", target_os = "ios", target_os = "tvos"), link_section = #macho_section)]
                 #[cfg_attr(target_os = "windows", link_section = #windows_section)]
