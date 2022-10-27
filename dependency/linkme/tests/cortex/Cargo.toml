@@ -5,9 +5,12 @@ authors = ["David Tolnay <dtolnay@gmail.com>"]
 edition = "2021"
 publish = false
 
+[features]
+used_linker = ["linkme/used_linker"]
+
 [dependencies]
 cortex-m = "0.7"
 cortex-m-rt = "0.7"
 cortex-m-semihosting = "0.5"
-linkme = { path = "../.." }
+linkme = { path = "../..", features = ["used_linker"]}
 panic-semihosting = { version = "0.6", features = ["exit"] }

@@ -3,7 +3,7 @@ use core::mem;
 use core::ops::Deref;
 use core::slice;
 
-use crate::private::Slice;
+use crate::__private::Slice;
 
 /// Collection of static elements that are gathered into a contiguous section of
 /// the binary by the linker.
@@ -20,6 +20,8 @@ use crate::private::Slice;
 /// expression must be `[..]` to indicate that elements come from elsewhere.
 ///
 /// ```
+/// # #![cfg_attr(feature = "used_linker", feature(used_with_arg))]
+/// #
 /// # struct Bencher;
 /// #
 /// use linkme::distributed_slice;
@@ -44,6 +46,8 @@ use crate::private::Slice;
 /// the final binary will be observed to be present in the slice at runtime.
 ///
 /// ```
+/// # #![cfg_attr(feature = "used_linker", feature(used_with_arg))]
+/// #
 /// # mod other_crate {
 /// #     use linkme::distributed_slice;
 /// #
@@ -106,6 +110,8 @@ use crate::private::Slice;
 /// slice.
 ///
 /// ```
+/// # #![cfg_attr(feature = "used_linker", feature(used_with_arg))]
+/// #
 /// # pub struct Bencher;
 /// #
 /// use linkme::distributed_slice;
@@ -220,6 +226,8 @@ impl<T> DistributedSlice<[T]> {
     /// `static_slice()`.
     ///
     /// ```no_run
+    /// # #![cfg_attr(feature = "used_linker", feature(used_with_arg))]
+    /// #
     /// # struct Bencher;
     /// #
     /// use linkme::distributed_slice;

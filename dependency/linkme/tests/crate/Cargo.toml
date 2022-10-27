@@ -9,4 +9,4 @@ publish = false
 path = "test.rs"
 
 [dependencies]
-linkme = { path = "../.." }
+linkme = { path = "../..", features = ["used_linker"]}

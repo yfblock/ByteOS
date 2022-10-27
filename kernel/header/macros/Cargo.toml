@@ -13,4 +13,4 @@ lazy_static = "1.4.0"
 quote = "1.0"
 syn = { version = "*", features = ["full"]}
 
-linkme = { path = "../../../dependency/linkme" }
+linkme = { path = "../../../dependency/linkme", features = ["used_linker"] }

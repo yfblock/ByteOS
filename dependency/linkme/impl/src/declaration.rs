@@ -57,6 +57,12 @@ pub fn expand(input: TokenStream) -> TokenStream {
         Err(err) => return err.to_compile_error(),
     };
 
+    let used = if cfg!(feature = "used_linker") {
+        quote!(#[used(linker)])
+    } else {
+        quote!(#[used])
+    };
+
     let linux_section = linker::linux::section(&ident);
     let linux_section_start = linker::linux::section_start(&ident);
     let linux_section_stop = linker::linux::section_stop(&ident);
@@ -116,25 +122,25 @@ pub fn expand(input: TokenStream) -> TokenStream {
                 #[cfg_attr(any(target_os = "macos", target_os = "ios", target_os = "tvos"), link_name = #macho_section_start)]
                 #[cfg_attr(target_os = "illumos", link_name = #illumos_section_start)]
                 #[cfg_attr(target_os = "freebsd", link_name = #freebsd_section_start)]
-                static LINKME_START: <#ty as #linkme_path::private::Slice>::Element;
+                static LINKME_START: <#ty as #linkme_path::__private::Slice>::Element;
 
                 #[cfg_attr(any(target_os = "none", target_os = "linux"), link_name = #linux_section_stop)]
                 #[cfg_attr(any(target_os = "macos", target_os = "ios", target_os = "tvos"), link_name = #macho_section_stop)]
                 #[cfg_attr(target_os = "illumos", link_name = #illumos_section_stop)]
                 #[cfg_attr(target_os = "freebsd", link_name = #freebsd_section_stop)]
-                static LINKME_STOP: <#ty as #linkme_path::private::Slice>::Element;
+                static LINKME_STOP: <#ty as #linkme_path::__private::Slice>::Element;
 
                 #[cfg_attr(any(target_os = "none", target_os = "linux"), link_name = #linux_dupcheck_start)]
                 #[cfg_attr(any(target_os = "macos", target_os = "ios", target_os = "tvos"), link_name = #macho_dupcheck_start)]
                 #[cfg_attr(target_os = "illumos", link_name = #illumos_dupcheck_start)]
                 #[cfg_attr(target_os = "freebsd", link_name = #freebsd_dupcheck_start)]
-                static DUPCHECK_START: #linkme_path::private::usize;
+                static DUPCHECK_START: #linkme_path::__private::usize;
 
                 #[cfg_attr(any(target_os = "none", target_os = "linux"), link_name = #linux_dupcheck_stop)]
                 #[cfg_attr(any(target_os = "macos", target_os = "ios", target_os = "tvos"), link_name = #macho_dupcheck_stop)]
                 #[cfg_attr(target_os = "illumos", link_name = #illumos_dupcheck_stop)]
                 #[cfg_attr(target_os = "freebsd", link_name = #freebsd_dupcheck_stop)]
-                static DUPCHECK_STOP: #linkme_path::private::usize;
+                static DUPCHECK_STOP: #linkme_path::__private::usize;
             }
 
             #[cfg(target_os = "windows")]
@@ -153,20 +159,20 @@ pub fn expand(input: TokenStream) -> TokenStream {
             #[link_section = #windows_dupcheck_stop]
             static DUPCHECK_STOP: () = ();
 
-            #[used(linker)]
+            #used
             #[cfg(any(target_os = "none", target_os = "linux", target_os = "illumos", target_os = "freebsd"))]
             #[cfg_attr(any(target_os = "none", target_os = "linux"), link_section = #linux_section)]
             #[cfg_attr(target_os = "illumos", link_section = #illumos_section)]
             #[cfg_attr(target_os = "freebsd", link_section = #freebsd_section)]
-            static mut LINKME_PLEASE: [<#ty as #linkme_path::private::Slice>::Element; 0] = [];
+            static mut LINKME_PLEASE: [<#ty as #linkme_path::__private::Slice>::Element; 0] = [];
 
-            #[used(linker)]
+            #used
             #[cfg_attr(any(target_os = "none", target_os = "linux"), link_section = #linux_dupcheck)]
             #[cfg_attr(any(target_os = "macos", target_os = "ios", target_os = "tvos"), link_section = #macho_dupcheck)]
             #[cfg_attr(target_os = "windows", link_section = #windows_dupcheck)]
             #[cfg_attr(target_os = "illumos", link_section = #illumos_dupcheck)]
             #[cfg_attr(target_os = "freebsd", link_section = #freebsd_dupcheck)]
-            static DUPCHECK: #linkme_path::private::usize = 1;
+            static DUPCHECK: #linkme_path::__private::usize = 1;
 
             #[cfg(not(any(
                 target_os = "none",
@@ -180,8 +186,8 @@ pub fn expand(input: TokenStream) -> TokenStream {
             )))]
             #unsupported_platform
 
-            #linkme_path::private::assert!(
-                #linkme_path::private::mem::size_of::<<#ty as #linkme_path::private::Slice>::Element>() > 0,
+            #linkme_path::__private::assert!(
+                #linkme_path::__private::mem::size_of::<<#ty as #linkme_path::__private::Slice>::Element>() > 0,
             );
 
             unsafe {

@@ -36,6 +36,8 @@
 //! expression must be `[..]` to indicate that elements come from elsewhere.
 //!
 //! ```
+//! # #![cfg_attr(feature = "used_linker", feature(used_with_arg))]
+//! #
 //! # struct Bencher;
 //! #
 //! use linkme::distributed_slice;
@@ -50,6 +52,8 @@
 //! expression.
 //!
 //! ```
+//! # #![cfg_attr(feature = "used_linker", feature(used_with_arg))]
+//! #
 //! # mod other_crate {
 //! #     use linkme::distributed_slice;
 //! #
@@ -75,6 +79,8 @@
 //! The distributed slice behaves in all ways like `&'static [T]`.
 //!
 //! ```no_run
+//! # #![cfg_attr(feature = "used_linker", feature(used_with_arg))]
+//! #
 //! # use linkme::distributed_slice;
 //! #
 //! # struct Bencher;
@@ -113,8 +119,10 @@
 
 mod distributed_slice;
 
+// Not public API.
 #[doc(hidden)]
-pub mod private;
+#[path = "private.rs"]
+pub mod __private;
 
 pub use linkme_impl::*;
 

@@ -7,5 +7,5 @@ edition = "2021"
 
 [dependencies]
 task = { path = "../kernel/task" }
-linkme = { path = "../dependency/linkme" }
+linkme = { path = "../dependency/linkme", features = ["used_linker"] }
 # header = { path = "../kernel/header"}
