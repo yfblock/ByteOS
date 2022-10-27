@@ -12,5 +12,5 @@ fatfs = { path = "../kernel/fatfs" }
 task = { path = "../kernel/task" }
 macros = { path = "../kernel/header/macros" }
 
-linkme = { path = "../dependency/linkme", features = ["used_linker"] }
+linkme = { version = "0.3", features = ["used_linker"] }
 test_tasks = { path = "../test_tasks" }

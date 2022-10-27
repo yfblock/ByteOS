@@ -58,7 +58,7 @@ pub extern "C" fn rust_main(_hart_id: usize, _device_tree_addr: usize) -> ! {
 
     println!("test func value: {}", test_tasks::test_func());
 
-    let sum = task::test();
+    let sum = task::TASKS.iter().fold(0, |preValue, f| preValue + f());
     println!("len of functions array: {}", task::TASKS.len());
     println!("sum of linkme functions: {}", sum);
     

@@ -8,6 +8,12 @@ pub fn test_func() -> usize {
     123
 }
 
-pub fn test() {
+#[linkme::distributed_slice(task::TASKS)]
+pub fn func1() -> usize {
+    456
+}
 
+#[linkme::distributed_slice(task::TASKS)]
+pub fn func2() -> usize {
+    789
 }

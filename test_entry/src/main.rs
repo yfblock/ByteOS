@@ -15,7 +15,8 @@ fn main() {
     // println!("------------- Test Fatfs -------------");
     // fatfs::test();
     println!("------------- Test Task --------------");
-    let sum = task::test();
+    // let sum = task::test();
+    let sum = task::TASKS.iter().fold(0, |b, f| b + f());
     println!("len of function array: {}", task::TASKS.len());
     println!("sum of functions: {}", sum);
     println!("------------- Test End ---------------");
