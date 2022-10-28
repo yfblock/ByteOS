@@ -12,15 +12,15 @@ panic = "abort"
 panic = "abort"
 
 [dependencies]
+
+kalloc = { path = "../kernel/kalloc" }
+
 # FileSystem
-vfscore = { path = "../kernel/vfscore" }
-ramfs = { path = "../kernel/ramfs" }
-fatfs = { path = "../kernel/fatfs" }
-
-task = { path = "../kernel/task" }
-macros = { path = "../kernel/header/macros" }
-
-linkme = { version = "0.3", features = ["used_linker"] }
-test_tasks = { path = "../test_tasks" }
+# vfscore = { path = "../kernel/vfscore" }
+# ramfs = { path = "../kernel/ramfs" }
+# fatfs = { path = "../kernel/fatfs", features = ['no_std'] }
 
 header = { path = "../kernel/header" }
+
+
+dtb-walker = "0.1"

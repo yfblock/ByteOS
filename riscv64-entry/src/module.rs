@@ -1,3 +1,3 @@
-use macros::byteos_module_use;
+use header::byteos_module_use;
 
-byteos_module_use!(test_tasks);
+byteos_module_use!(kalloc);

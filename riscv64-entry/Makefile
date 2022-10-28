@@ -1,7 +1,7 @@
 .PHONY: all run clean
 
 TARGET      := riscv64imac-unknown-none-elf
-KERNEL_FILE := target/$(TARGET)/release/os
+KERNEL_FILE := ../target/$(TARGET)/release/os
 DEBUG_FILE  ?= $(KERNEL_FILE)
 
 all:

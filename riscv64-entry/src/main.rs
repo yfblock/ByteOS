@@ -9,8 +9,7 @@
 #![allow(unaligned_references)]
 #![feature(used_with_arg)]
 
-use linkme::distributed_slice;
-use task::SHENANIGANS;
+extern crate alloc;
 
 #[macro_use]
 mod console;
@@ -19,6 +18,8 @@ mod sbi;
 mod module;
 
 use core::arch::asm;
+
+use alloc::format;
 
 /// 汇编入口函数
 /// 
@@ -47,6 +48,7 @@ unsafe extern "C" fn _start() -> ! {
 /// 进行操作系统的初始化，
 #[no_mangle]
 pub extern "C" fn rust_main(_hart_id: usize, _device_tree_addr: usize) -> ! {
+
     // 让其他核心进入等待 用在多核的情况 单核下无需使用。
     // if hart_id != 0 {
     //     support_hart_resume(hart_id, 0);
@@ -54,13 +56,31 @@ pub extern "C" fn rust_main(_hart_id: usize, _device_tree_addr: usize) -> ! {
 
     println!("[kernel] welcome to ByteOS");
 
-    println!("len of the SHENANIGANS: {}", SHENANIGANS.len());
+    // 执行优先级最高的初始化函数
+    header::INIT_FUNC_PRIOR_0.iter().for_each(|f| f());
 
-    println!("test func value: {}", test_tasks::test_func());
+    // 测试设备树代码
+    use dtb_walker::{utils::indent, Dtb, DtbObj, HeaderError as E, WalkOperation as Op};
 
-    let sum = task::TASKS.iter().fold(0, |preValue, f| preValue + f());
-    println!("len of functions array: {}", task::TASKS.len());
-    println!("sum of linkme functions: {}", sum);
+    const INDENT_WIDTH: usize = 4;
+
+    let dtb = unsafe {
+        Dtb::from_raw_parts_filtered(_device_tree_addr as _, |e| {
+            matches!(e, E::Misaligned(4) | E::LastCompVersion(16))
+        })
+    }
+    .map_err(|e| format!("verify header failed: {e:?}")).expect("header error");
+    dtb.walk(|path, obj| match obj {
+        DtbObj::SubNode { name } => {
+            println!("{}{}/{:?}", indent(path.level(), INDENT_WIDTH), path, name);
+            Op::StepInto
+        }
+        DtbObj::Property(prop) => {
+            let indent = indent(path.level(), INDENT_WIDTH);
+            println!("{}{:?}", indent, prop);
+            Op::StepOver
+        }
+    });
     
     // 调用rust api关机
     panic!("正常关机")

@@ -1,0 +1,4 @@
+[workspace]
+members = [
+    "riscv64-entry",
+]
