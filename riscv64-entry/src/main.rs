@@ -19,7 +19,7 @@ mod module;
 
 use core::arch::asm;
 
-use alloc::format;
+use alloc::{format, string::ToString};
 
 /// 汇编入口函数
 /// 
@@ -72,10 +72,11 @@ pub extern "C" fn rust_main(_hart_id: usize, _device_tree_addr: usize) -> ! {
     .map_err(|e| format!("verify header failed: {e:?}")).expect("header error");
     dtb.walk(|path, obj| match obj {
         DtbObj::SubNode { name } => {
-            println!("{}{}/{:?}", indent(path.level(), INDENT_WIDTH), path, name);
+            // println!("{}{}/{:?}", indent(path.level(), INDENT_WIDTH), path, name);
             Op::StepInto
         }
         DtbObj::Property(prop) => {
+            if !path.to_string().starts_with("/memory") { return Op::StepOver; }
             let indent = indent(path.level(), INDENT_WIDTH);
             println!("{}{:?}", indent, prop);
             Op::StepOver

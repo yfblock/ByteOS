@@ -1,6 +1,8 @@
 #![no_std]
 #![feature(used_with_arg)]
 
+// 这个模块暂时还是借用已有的实现，后面如果有时间可以再进行修改
+
 use buddy_system_allocator::LockedHeap;
 
 // 堆大小

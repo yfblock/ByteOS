@@ -14,7 +14,7 @@ run: all
     -bios default \
     -kernel kernel-qemu \
     -nographic \
-    -smp 4 -m 64m
+    -smp 4 -m 128m
 
 clean:
 	rm kernel-qemu
