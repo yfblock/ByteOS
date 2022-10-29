@@ -19,7 +19,7 @@ mod module;
 
 use core::arch::asm;
 
-use alloc::{format, string::ToString};
+use alloc::boxed::Box;
 
 /// 汇编入口函数
 /// 
@@ -58,6 +58,10 @@ pub extern "C" fn rust_main(_hart_id: usize, _device_tree_addr: usize) -> ! {
 
     // 执行优先级最高的初始化函数
     header::INIT_FUNC_PRIOR_0.iter().for_each(|f| f());
+
+    // 测试 Allocator
+    let test1 = Box::new("123");
+    println!("{}", test1);
 
     // 测试设备树代码
     // use dtb_walker::{utils::indent, Dtb, DtbObj, HeaderError as E, WalkOperation as Op};
