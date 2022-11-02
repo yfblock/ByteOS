@@ -1,4 +1,4 @@
-use crate::sbi::shutdown;
+use sbi::shutdown;
 use core::panic::PanicInfo;
 
 /// 错误处理

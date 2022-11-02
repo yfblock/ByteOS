@@ -1,5 +1,6 @@
 //! 调用 Machine 层的操作
 // 目前还不会用到全部的 SBI 调用，暂时允许未使用的变量或函数
+#![no_std]
 #![allow(unused)]
 
 use core::arch::asm;

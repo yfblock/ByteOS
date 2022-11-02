@@ -5,6 +5,12 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[features]
+console_sbi = ["console/console_sbi"]
+console_uart = ["console/console_uart"]
+
+default = ["console_uart"]
+
 [profile.dev]
 panic = "abort"
 
@@ -12,6 +18,9 @@ panic = "abort"
 panic = "abort"
 
 [dependencies]
+
+sbi = { path = "../kernel/sbi" }
+console = { path = "../kernel/console", default-features = false }
 
 kalloc = { path = "../kernel/kalloc" }
 
@@ -22,5 +31,7 @@ kalloc = { path = "../kernel/kalloc" }
 
 header = { path = "../kernel/header" }
 
+uart = { path = "../kernel/uart" }
+ns16550 = { path = "../kernel/uart_impl/ns16550" }
 
 dtb-walker = "0.1"
