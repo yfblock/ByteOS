@@ -8,7 +8,7 @@ edition = "2021"
 [features]
 console_sbi = []
 console_uart = []
-default = ["console_uart"]
+default = ["console_sbi"]
 
 [dependencies]
 sbi = { path = "../sbi" }

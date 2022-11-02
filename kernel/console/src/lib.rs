@@ -28,18 +28,15 @@ struct Stdout;
 
 #[cfg(feature = "console_sbi")]
 use sbi::console_putchar;
-use uart::Uart;
 
 #[cfg(feature = "console_uart")]
-#[macro_use]
-extern crate lazy_static;
-
-#[cfg(feature = "console_uart")]
+// 利用 mod 将整个代码包裹在 cfg 中
 mod serial {
     use header::distributed_slice;
     use header::INIT_FUNC_PRIOR_0;
     use ns16550::Serial;
     use uart::Uart;
+    use lazy_static::lazy_static;
 
     lazy_static! {
         pub(crate) static ref SERIAL: Serial = Serial::new(0x1000_0000);
@@ -49,19 +46,23 @@ mod serial {
     fn init_uart() {
         SERIAL.init();
     }
+
+    pub(crate) fn uart_write(data: &[u8]) {
+        SERIAL.write(data);
+    }
 }
 
 impl Write for Stdout {
     fn write_str(&mut self, s: &str) -> Result {
         let mut buffer = [0u8; 4];
-        for c in s.chars() {
+
+        s.chars().for_each(|c| {
             #[cfg(feature = "console_sbi")]
-            for code_point in c.encode_utf8(&mut buffer).as_bytes().iter() {
-                console_putchar(*code_point);
-            }
+            c.encode_utf8(&mut buffer).as_bytes().iter()
+                .for_each(|show_char| console_putchar(*show_char));
             #[cfg(feature = "console_uart")]
-            serial::SERIAL.write(c.encode_utf8(&mut buffer).as_bytes());
-        }
+            serial::uart_write(c.encode_utf8(&mut buffer).as_bytes());
+        });
         Ok(())
     }
 }

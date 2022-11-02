@@ -9,7 +9,7 @@ edition = "2021"
 console_sbi = ["console/console_sbi"]
 console_uart = ["console/console_uart"]
 
-default = ["console_sbi"]
+default = ["console_uart"]
 
 [profile.dev]
 panic = "abort"
