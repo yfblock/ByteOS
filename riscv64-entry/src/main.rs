@@ -12,14 +12,14 @@
 extern crate alloc;
 
 #[macro_use]
-mod console;
+extern crate console;
 mod panic;
-mod sbi;
 mod module;
 
 use core::arch::asm;
 
 use alloc::boxed::Box;
+use dtb_walker::Property;
 
 /// 汇编入口函数
 /// 
@@ -64,28 +64,33 @@ pub extern "C" fn rust_main(_hart_id: usize, _device_tree_addr: usize) -> ! {
     println!("{}", test1);
 
     // 测试设备树代码
-    // use dtb_walker::{utils::indent, Dtb, DtbObj, HeaderError as E, WalkOperation as Op};
+    use dtb_walker::{utils::indent, Dtb, DtbObj, HeaderError as E, WalkOperation as Op};
+    use alloc::format;
 
-    // const INDENT_WIDTH: usize = 4;
+    const INDENT_WIDTH: usize = 4;
 
-    // let dtb = unsafe {
-    //     Dtb::from_raw_parts_filtered(_device_tree_addr as _, |e| {
-    //         matches!(e, E::Misaligned(4) | E::LastCompVersion(16))
-    //     })
-    // }
-    // .map_err(|e| format!("verify header failed: {e:?}")).expect("header error");
-    // dtb.walk(|path, obj| match obj {
-    //     DtbObj::SubNode { name } => {
-    //         // println!("{}{}/{:?}", indent(path.level(), INDENT_WIDTH), path, name);
-    //         Op::StepInto
-    //     }
-    //     DtbObj::Property(prop) => {
-    //         if !path.to_string().starts_with("/memory") { return Op::StepOver; }
-    //         let indent = indent(path.level(), INDENT_WIDTH);
-    //         println!("{}{:?}", indent, prop);
-    //         Op::StepOver
-    //     }
-    // });
+    let dtb = unsafe {
+        Dtb::from_raw_parts_filtered(_device_tree_addr as _, |e| {
+            matches!(e, E::Misaligned(4) | E::LastCompVersion(16))
+        })
+    }
+    .map_err(|e| format!("verify header failed: {e:?}")).expect("header error");
+    dtb.walk(|path, obj| match obj {
+        DtbObj::SubNode { name } => {
+            // _puts(name);
+            // println!("");
+            // println!("{}{}/{:?}", indent(path.level(), INDENT_WIDTH), path, name);
+            Op::StepInto
+        }
+        DtbObj::Property(prop) => {
+            let indent = indent(path.level(), INDENT_WIDTH);
+            // println!("{}{}", indent, path);
+            // if !path.to_string().starts_with("/memory") { return Op::StepOver; }
+            // let indent = indent(path.level(), INDENT_WIDTH);
+            // println!("{}{:?}", indent, prop);
+            Op::StepOver
+        }
+    });
     
     // 调用rust api关机
     panic!("正常关机")
