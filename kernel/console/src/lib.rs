@@ -54,15 +54,15 @@ mod serial {
 
 impl Write for Stdout {
     fn write_str(&mut self, s: &str) -> Result {
-        let mut buffer = [0u8; 4];
 
-        s.chars().for_each(|c| {
-            #[cfg(feature = "console_sbi")]
-            c.encode_utf8(&mut buffer).as_bytes().iter()
-                .for_each(|show_char| console_putchar(*show_char));
-            #[cfg(feature = "console_uart")]
-            serial::uart_write(c.encode_utf8(&mut buffer).as_bytes());
-        });
+        let bytes = s.as_bytes();
+
+        #[cfg(feature = "console_sbi")]
+        bytes.iter().for_each(|show_char| console_putchar(*show_char));
+        
+        #[cfg(feature = "console_uart")]
+        serial::uart_write(bytes);
+
         Ok(())
     }
 }
@@ -70,6 +70,7 @@ impl Write for Stdout {
 /// 输出函数
 /// 
 /// 对参数进行输出 主要使用在输出相关的宏中 如println
+#[inline]
 pub fn print(args: Arguments) {
     Stdout.write_fmt(args).unwrap();
 }
