@@ -106,7 +106,6 @@ dependencies = [
 name = "macros"
 version = "0.1.0"
 dependencies = [
- "lazy_static",
  "linkme",
  "proc-macro2",
  "quote",
