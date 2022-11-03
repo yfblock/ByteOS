@@ -48,11 +48,9 @@ mod serial {
     use header::INIT_FUNC_PRIOR_0;
     use ns16550::Serial;
     use uart::Uart;
-    use lazy_static::lazy_static;
+    use spin::lazy::Lazy;
 
-    lazy_static! {
-        pub(crate) static ref SERIAL: Serial = Serial::new(0x1000_0000);
-    }
+    pub(crate) static SERIAL: Lazy<Serial> = Lazy::new(|| Serial::new(0x1000_0000));
 
     #[distributed_slice(INIT_FUNC_PRIOR_0)]
     fn init_uart() {
