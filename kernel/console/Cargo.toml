@@ -16,3 +16,5 @@ ns16550 = { path = "../uart_impl/ns16550" }
 uart = { path = "../uart" }
 header = { path = "../header" }
 lazy_static = { version = "1.4.0", features = ["spin_no_std"] }
+
+spin = { version = "0.9.4", features = ["lazy"] }
