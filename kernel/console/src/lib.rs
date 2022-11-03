@@ -1,6 +1,18 @@
 #![no_std]
 #![feature(used_with_arg)]
 
+#[cfg(all(
+    feature = "console_sbi", 
+    feature = "console_uart"
+))]
+compile_error!("you should select just one method in console crate");
+
+#[cfg(not(any(
+    feature = "console_sbi", 
+    feature = "console_uart"
+)))]
+compile_error!("you should select a output method in console crate");
+
 use core::fmt::{Write, Arguments, Result};
 
 /* 下面的代码跟输出相关，如果不需要输出则直接将相应的代码
