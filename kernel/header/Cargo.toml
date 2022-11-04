@@ -8,3 +8,4 @@ edition = "2021"
 [dependencies]
 linkme = { version = "0.3", features = ["used_linker"] }
 macros = { path = "macros" }
+spin = { version = "0.9.4", features = ["once"] }

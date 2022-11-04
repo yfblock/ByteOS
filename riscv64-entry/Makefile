@@ -14,6 +14,7 @@ run: all
     -bios default \
     -kernel kernel-qemu \
     -nographic \
+	-drive file=fat32.img,if=none,format=raw,id=x0 \
     -smp 4 -m 128m
 
 clean:

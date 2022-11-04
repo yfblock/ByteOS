@@ -21,6 +21,17 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bef38d45163c2f1dde094a7dfd33ccf595c92905c8f8f4fdc18d06fb1037718a"
 
 [[package]]
+name = "blk-device"
+version = "0.1.0"
+dependencies = [
+ "console",
+ "dtb-walker",
+ "fdt",
+ "header",
+ "virtio-drivers",
+]
+
+[[package]]
 name = "buddy_system_allocator"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -28,6 +39,12 @@ checksum = "55703ac5f02c246ce6158eff6ae2dd9e9069917969682b6831f8a5123abb8a48"
 dependencies = [
  "spin 0.7.1",
 ]
+
+[[package]]
+name = "cfg-if"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "baf1de4339761588bc0619e3cbc0120ee582ebb74b53b4efbf79117bd2da40fd"
 
 [[package]]
 name = "console"
@@ -48,11 +65,18 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bc3a45c340447805972e5f53bf10e7118d8333bfb779f9c0ba7ec6ea30d40cd8"
 
 [[package]]
+name = "fdt"
+version = "0.1.4"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "964f5becd44d069dca0beea2b4bc05639ae7bf3b3f5369c295aff360bb57cca2"
+
+[[package]]
 name = "header"
 version = "0.1.0"
 dependencies = [
  "linkme",
  "macros",
+ "spin 0.9.4",
 ]
 
 [[package]]
@@ -103,6 +127,15 @@ dependencies = [
 ]
 
 [[package]]
+name = "log"
+version = "0.4.17"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "abb12e687cfb44aa40f41fc3978ef76448f9b6038cad6aef4259d3c095a2382e"
+dependencies = [
+ "cfg-if",
+]
+
+[[package]]
 name = "macros"
 version = "0.1.0"
 dependencies = [
@@ -124,6 +157,7 @@ dependencies = [
 name = "os"
 version = "0.1.0"
 dependencies = [
+ "blk-device",
  "console",
  "dtb-walker",
  "header",
@@ -222,6 +256,15 @@ name = "unicode-ident"
 version = "1.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6ceab39d59e4c9499d4e5a8ee0e2735b891bb7308ac83dfb4e80cad195c9f6f3"
+
+[[package]]
+name = "virtio-drivers"
+version = "0.1.0"
+source = "git+https://github.com/rcore-os/virtio-drivers#233cf1c1138b821afeb783681ba65b605ef0211c"
+dependencies = [
+ "bitflags",
+ "log",
+]
 
 [[package]]
 name = "volatile"
