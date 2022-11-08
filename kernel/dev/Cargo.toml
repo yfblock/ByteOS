@@ -1,5 +1,5 @@
 [package]
-name = "blk-device"
+name = "dev"
 version = "0.1.0"
 edition = "2021"
 
@@ -12,4 +12,4 @@ fdt = "0.1.4"
 virtio-drivers = { git = "https://github.com/rcore-os/virtio-drivers" }
 console = { path = "../console" }
 
-dev = { path = "../dev" }
+spin = { version = "0.9.4", features = ["lazy", "once"] }

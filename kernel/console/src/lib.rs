@@ -64,17 +64,21 @@ mod serial {
 
 impl Write for Stdout {
     fn write_str(&mut self, s: &str) -> Result {
-
-        let bytes = s.as_bytes();
-
-        #[cfg(feature = "console_sbi")]
-        bytes.iter().for_each(|show_char| console_putchar(*show_char));
-        
-        #[cfg(feature = "console_uart")]
-        serial::uart_write(bytes);
-
+        puts(s.as_bytes());
         Ok(())
     }
+}
+
+/// 输出函数
+/// 
+/// 对 u8 数组进行输出
+#[inline]
+pub fn puts(bytes: &[u8]) {
+    #[cfg(feature = "console_sbi")]
+    bytes.iter().for_each(|show_char| console_putchar(*show_char));
+    
+    #[cfg(feature = "console_uart")]
+    serial::uart_write(bytes);
 }
 
 /// 输出函数

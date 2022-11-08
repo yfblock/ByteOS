@@ -25,6 +25,7 @@ name = "blk-device"
 version = "0.1.0"
 dependencies = [
  "console",
+ "dev",
  "dtb-walker",
  "fdt",
  "header",
@@ -56,6 +57,18 @@ dependencies = [
  "sbi",
  "spin 0.9.4",
  "uart",
+]
+
+[[package]]
+name = "dev"
+version = "0.1.0"
+dependencies = [
+ "console",
+ "dtb-walker",
+ "fdt",
+ "header",
+ "spin 0.9.4",
+ "virtio-drivers",
 ]
 
 [[package]]
@@ -159,6 +172,7 @@ version = "0.1.0"
 dependencies = [
  "blk-device",
  "console",
+ "dev",
  "dtb-walker",
  "header",
  "kalloc",
