@@ -65,7 +65,6 @@ version = "0.1.0"
 dependencies = [
  "console",
  "dtb-walker",
- "fdt",
  "header",
  "spin 0.9.4",
  "virtio-drivers",
@@ -87,6 +86,7 @@ checksum = "964f5becd44d069dca0beea2b4bc05639ae7bf3b3f5369c295aff360bb57cca2"
 name = "header"
 version = "0.1.0"
 dependencies = [
+ "fdt",
  "linkme",
  "macros",
  "spin 0.9.4",

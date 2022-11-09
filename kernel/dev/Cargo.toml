@@ -8,7 +8,6 @@ edition = "2021"
 [dependencies]
 header = { path = "../header" }
 dtb-walker = "0.1"
-fdt = "0.1.4"
 virtio-drivers = { git = "https://github.com/rcore-os/virtio-drivers" }
 console = { path = "../console" }
 

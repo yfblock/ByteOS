@@ -9,3 +9,5 @@ edition = "2021"
 linkme = { version = "0.3", features = ["used_linker"] }
 macros = { path = "macros" }
 spin = { version = "0.9.4", features = ["once"] }
+
+fdt = "0.1.4"

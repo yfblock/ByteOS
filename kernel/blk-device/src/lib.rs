@@ -22,7 +22,7 @@ extern crate alloc;
 fn read_block_device() {
     MMIO_ARR.wait().iter().for_each(|device| {
         if let DeviceType::Block = device.device_type() {
-            println!("{:?} Block device @ 0x{:X}", device.version(), device.vendor_id());
+            
         }
     });
 }

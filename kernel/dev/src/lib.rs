@@ -10,10 +10,8 @@ extern crate alloc;
 use alloc::vec;
 use alloc::vec::Vec;
 use console::println;
-use fdt::Fdt;
 use header::distributed_slice;
 use header::INIT_FUNC_PRIOR_1;
-use spin::Lazy;
 use spin::Once;
 use virtio_drivers::MmioTransport;
 use virtio_drivers::Transport;
@@ -54,8 +52,7 @@ pub static MMIO_ARR: Once<MmioVec> = Once::new();
 #[distributed_slice(INIT_FUNC_PRIOR_1)]
 pub fn init() {
     // 初始化内存
-    let fdt = unsafe { Fdt::from_ptr(*(header::DEVICE_TREE_ADDR.get().unwrap()) as *const u8).unwrap() };
-
+    let fdt = header::DEVICE_TREE_ADDR.wait();
     let mut mmio_vec = MmioVec::new();
     for node in fdt.all_nodes() {
         if let Some(compatible) = node.compatible() {
@@ -65,12 +62,12 @@ pub fn init() {
                     let vaddr = paddr;
                     let header = NonNull::new(vaddr as *mut VirtIOHeader).unwrap();
                     match unsafe { MmioTransport::new(header) } {
-                        Err(e) => {
-                            println!("Error creating VirtIO MMIO transport: {}", e)
+                        Err(_e) => {
+                            // println!("[MMIO] Error creating VirtIO MMIO transport: {}", e)
                         },
                         Ok(transport) => {
                             println!(
-                                "Detected virtio MMIO device with vendor id {:#X}, device type {:?}, version {:?}",
+                                "[device] Detected virtio MMIO device with vendor id {:#X}, device type {:?}, version {:?}",
                                 transport.vendor_id(),
                                 transport.device_type(),
                                 transport.version(),
