@@ -77,6 +77,27 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bc3a45c340447805972e5f53bf10e7118d8333bfb779f9c0ba7ec6ea30d40cd8"
 
 [[package]]
+name = "fatfs"
+version = "0.1.0"
+dependencies = [
+ "console",
+ "dev",
+ "fatfs 0.4.0",
+ "header",
+ "vfscore",
+ "virtio-drivers",
+]
+
+[[package]]
+name = "fatfs"
+version = "0.4.0"
+source = "git+https://github.com/rafalh/rust-fatfs.git#12418ebffee4dd9778d84b7d63a664328fea57f3"
+dependencies = [
+ "bitflags",
+ "log",
+]
+
+[[package]]
 name = "fdt"
 version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -174,6 +195,7 @@ dependencies = [
  "console",
  "dev",
  "dtb-walker",
+ "fatfs 0.1.0",
  "header",
  "kalloc",
  "ns16550",
@@ -270,6 +292,10 @@ name = "unicode-ident"
 version = "1.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6ceab39d59e4c9499d4e5a8ee0e2735b891bb7308ac83dfb4e80cad195c9f6f3"
+
+[[package]]
+name = "vfscore"
+version = "0.1.0"
 
 [[package]]
 name = "virtio-drivers"

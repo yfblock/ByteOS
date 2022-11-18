@@ -9,4 +9,9 @@ no_std = []
 
 [dependencies]
 vfscore = { path = "../vfscore" }
-inventory = "0.3.2"
+header = { path = "../header" }
+
+fatfs = { git = "https://github.com/rafalh/rust-fatfs.git", default-features = false, features = ['alloc'] }
+dev = { path = "../dev" }
+virtio-drivers = { git = "https://github.com/rcore-os/virtio-drivers" }
+console = { path = "../console" }

@@ -38,3 +38,5 @@ dtb-walker = "0.1"
 
 blk-device = { path = "../kernel/blk-device" }
 dev = { path = "../kernel/dev" }
+
+fatfs = { path = "../kernel/fatfs" }
